@@ -178,3 +178,42 @@ ORDER BY REGION_NAME;
 -- zad 30/2
 SELECT MIN_SALARY, MAX_SALARY FROM jobs
 WHERE JOB_TITLE LIKE 'Sale%';
+-- zad 1/3
+SELECT count(*) AS 'Liczba pracowników' FROM employees;
+-- zad 2/3
+SELECT avg(salary) FROM employees;
+-- zad 3/3
+SELECT DISTINCT FIRST_NAME FROM employees
+WHERE FIRST_NAME LIKE 'A%';
+-- zad 4/3
+SELECT avg(salary), min(salary), max(salary) FROM employees;
+-- zad 5/3
+SELECT sum(salary), avg(salary), min(salary), max(salary) FROM employees
+WHERE MANAGER_ID IS NOT NULL;
+-- zad 6/3
+SELECT JOB_ID, sum(salary) FROM employees
+GROUP BY JOB_ID;
+-- zad 7/3
+SELECT JOB_ID, count(*) FROM employees
+GROUP BY JOB_ID;
+-- zad 8/3
+SELECT avg(salary), JOB_ID, count(*) FROM employees
+GROUP BY JOB_ID
+HAVING count(*) >= 3;
+-- zad 9/3
+SELECT FIRST_NAME, count(*) FROM employees
+GROUP BY FIRST_NAME
+HAVING count(first_name) > 1
+ORDER BY count(*);
+-- zad 10/3
+SELECT DEPARTMENT_ID,  avg(SALARY) FROM employees
+GROUP BY DEPARTMENT_ID
+HAVING avg(SALARY) > 9000;
+-- zad 11/3
+SELECT DEPARTMENT_ID, max(salary), min(salary), max(salary) - min(salary) AS 'Różnica' FROM employees
+GROUP BY DEPARTMENT_ID;
+-- zad 12/3
+SELECT max(SALARY), MANAGER_ID FROM employees
+WHERE MANAGER_ID IS NOT NULL
+GROUP BY MANAGER_ID
+ORDER BY MANAGER_ID;
