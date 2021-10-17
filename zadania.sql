@@ -292,4 +292,50 @@ GROUP BY CITY;
 -- zad 30/3
 SELECT MANAGER_ID, count(DEPARTMENT_ID), DEPARTMENT_ID FROM departments
 WHERE MANAGER_ID IS NOT NULL
-GROUP BY MANAGER_ID
+GROUP BY MANAGER_ID;
+-- zad 1/4
+SELECT DEPARTMENT_ID, round(avg(salary), 2), truncate(avg(salary), 2), avg(SALARY) FROM employees
+GROUP BY DEPARTMENT_ID;
+-- zad 2/4
+SELECT upper(last_name), char_length(last_name) FROM employees;
+-- zad 3/4
+SELECT upper(region_name) FROM regions;
+-- zad 4/4
+SELECT SALARY, round((SALARY * 15.5), 1) FROM employees;
+-- zad 5/4
+SELECT sqrt(salary), pow(salary, 2) FROM employees;
+-- zad 6/4
+SELECT LPAD(COUNTRY_NAME, 20, '*') FROM  countries;
+-- zad 7/4
+SELECT JOB_TITLE, rpad(JOB_TITLE, 4, job_title) FROM jobs;
+-- zad 8/4
+SELECT JOB_TITLE, lower(rpad(JOB_TITLE, 4, job_title)) FROM jobs;
+-- zad 9/4
+SELECT replace(FIRST_NAME, 'a', '*') FROM employees;
+-- zad 10/4
+SELECT LAST_NAME,  substr(upper(last_name), 2) FROM employees
+GROUP BY LAST_NAME
+HAVING substr(upper(last_name), 2) RLIKE '^[APR]';
+-- zad 11/4
+SELECT * FROM employees
+WHERE LAST_NAME RLIKE '[Kk]';
+-- zad 12/4
+SELECT FIRST_NAME, LAST_NAME, DEPARTMENT_NAME FROM employees e
+JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID;
+-- zad 13/4
+SELECT COUNTRY_NAME, REGION_NAME FROM countries c
+JOIN regions r ON c.REGION_ID = r.REGION_ID;
+-- zad 14/4
+SELECT MAX_SALARY, MIN_SALARY, DEPARTMENT_NAME FROM jobs j
+JOIN job_history jh ON j.JOB_ID = jh.JOB_ID
+JOIN departments d ON jh.DEPARTMENT_ID = d.DEPARTMENT_ID;
+-- zad 15/4
+SELECT DEPARTMENT_NAME, count(*) AS 'number of employees' FROM employees e
+JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+GROUP BY DEPARTMENT_NAME
+ORDER BY count(*);
+-- zad 16/4
+SELECT DEPARTMENT_NAME, min(SALARY), max(SALARY) FROM departments d
+JOIN employees e ON d.DEPARTMENT_ID = e.DEPARTMENT_ID
+GROUP BY DEPARTMENT_NAME
+ORDER BY max(SALARY)
