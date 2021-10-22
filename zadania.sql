@@ -338,4 +338,40 @@ ORDER BY count(*);
 SELECT DEPARTMENT_NAME, min(SALARY), max(SALARY) FROM departments d
 JOIN employees e ON d.DEPARTMENT_ID = e.DEPARTMENT_ID
 GROUP BY DEPARTMENT_NAME
-ORDER BY max(SALARY)
+ORDER BY max(SALARY);
+-- zad 17/4
+SELECT JOB_TITLE, sum(SALARY) FROM employees e 
+JOIN jobs j on e.JOB_ID = j.JOB_ID
+GROUP BY JOB_TITLE;
+-- zad 18/4
+SELECT FIRST_NAME,
+	LAST_NAME,
+    SALARY * ifnull(COMMISSION_PCT, 0) AS 'Premia ifnull',
+    SALARY * coalesce(COMMISSION_PCT, 0) 'Premia' FROM employees;
+-- zad 19/4
+SELECT FIRST_NAME, LAST_NAME, if(COMMISSION_PCT IS NULL, 'Nie ma Premii', 'Jest premia') AS 'Premia' FROM employees;
+-- zad 20/4
+SELECT FIRST_NAME, LAST_NAME, sum(SALARY + ifnull(COMMISSION_PCT, 0)) AS 'Pensja + premia'  FROM employees
+GROUP BY LAST_NAME;
+-- zad 21/4
+SELECT replace(upper(DEPARTMENT_NAME), 'A', 'E') AS 'changed letter' FROM departments;
+-- zad 22/4
+SELECT JOB_ID, count(*) AS 'Workers' FROM employees
+GROUP BY JOB_ID
+HAVING count(*) >= 3;
+-- zad 23/4
+SELECT DEPARTMENT_NAME, avg(SALARY) FROM departments d
+JOIN employees e ON d.DEPARTMENT_ID = e.DEPARTMENT_ID
+GROUP BY DEPARTMENT_NAME
+HAVING avg(SALARY) BETWEEN 5000 AND 7000;
+-- zad 24/4
+SELECT JOB_TITLE, min(SALARY) FROM jobs j
+JOIN employees e ON j.JOB_ID = e.JOB_ID
+GROUP BY JOB_TITLE
+HAVING min(SALARY) > 10000;
+-- zad 25/4
+SELECT JOB_TITLE, avg(SALARY) FROM employees e
+JOIN jobs j ON e.JOB_ID = j.JOB_ID
+GROUP BY JOB_TITLE
+HAVING avg(SALARY) < 10000
+ORDER BY avg(SALARY)
